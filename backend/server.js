@@ -3,6 +3,9 @@ const path = require('path');
 
 const app = express();
 
+const connectDB = require('./config/db')
+connectDB();
+
 // Routes import
 
 const testRoutes = require('./routes/testRoutes');
