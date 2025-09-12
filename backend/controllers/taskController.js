@@ -20,11 +20,17 @@ const getTasks = async (req, res) => {
         let taskQuery = Task.find(query);
 
 
-        if(sort) {
+        if (sort) {
             taskQuery = taskQuery.sort(sort);
         };
 
         const tasks = await taskQuery;
+
+        if (tasks.length === 0) {
+            return res.status(404).json({ message: 'No tasks found' });
+        }
+
+
         res.json(tasks);
 
     } catch (err) {
