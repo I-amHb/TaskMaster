@@ -15,6 +15,8 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const userRoutes = require('./routes/userRoutes');
 
+const authRoutes = require('./routes/authRoutes');
+
 // Middlewares
 
 app.use(express.json());
@@ -25,6 +27,8 @@ app.use(express.json());
 app.use('/api/tasks', taskRoutes);
 
 app.use('/api/users', userRoutes);
+
+app.use('/api/auth', authRoutes);
 
 app.use('/api', testRoutes);
 
