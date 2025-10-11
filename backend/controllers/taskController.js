@@ -7,6 +7,8 @@ const getTasks = async (req, res) => {
 
         const query = {};
 
+        query.user = req.user.id;
+
         if (priority) query.priority = priority;
         if (completed) query.completed = completed === 'true';
 
@@ -56,7 +58,13 @@ const getTaskById = async (req, res) => {
 const createTask = async (req, res) => {
     try {
         const { title, description, priority, deadline } = req.body;
-        const newTask = new Task({ title, description, priority, deadline });
+        const newTask = new Task({ 
+            title, 
+            description, 
+            priority, 
+            deadline,
+            user: req.user.id
+        });
         await newTask.save();
         res.status(201).json(newTask);
     } catch (err) {
