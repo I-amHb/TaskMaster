@@ -14,8 +14,11 @@ const registerUser = async (req, res) => {
         const newUser = new User({ username, email, password });
         await newUser.save();
 
+        const token = generateToken(newUser._id);
+
         res.status(201).json({
             message: 'User registered successfully',
+            token,
             user: {
                 id: newUser._id,
                 username: newUser.username,
