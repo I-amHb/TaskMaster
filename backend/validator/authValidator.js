@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-// Schema for user registration
+
 const registerSchema = Joi.object({
   username: Joi.string().min(3).required().messages({
     'string.empty': 'Username is required',
@@ -16,13 +16,13 @@ const registerSchema = Joi.object({
   }),
 });
 
-// Schema for user login
+
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
 });
 
-// Middleware for registration validation
+
 const validateRegister = (req, res, next) => {
   const { error } = registerSchema.validate(req.body, { abortEarly: false });
   if (error) {
@@ -32,7 +32,7 @@ const validateRegister = (req, res, next) => {
   next();
 };
 
-// Middleware for login validation
+
 const validateLogin = (req, res, next) => {
   const { error } = loginSchema.validate(req.body, { abortEarly: false });
   if (error) {
@@ -42,7 +42,4 @@ const validateLogin = (req, res, next) => {
   next();
 };
 
-module.exports = {
-  validateRegister,
-  validateLogin,
-};
+module.exports = { validateRegister, validateLogin };

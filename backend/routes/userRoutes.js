@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const { validateRegister, validateLogin } = require('../validator/authValidator')
 const { registerUser, loginUser, getUsers, getUserById } = require('../controllers/userController');
 
-router.post('/register', registerUser);
+router.post('/register', validateRegister, registerUser);
 
-router.post('/login', loginUser);
+router.post('/login', validateLogin, loginUser);
 
 router.get('/', getUsers);
 
